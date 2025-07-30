@@ -336,6 +336,10 @@ For support and questions:
 -Meeting id and transcript
 <img width="1890" height="902" alt="image" src="https://github.com/user-attachments/assets/1c58a502-c940-46ba-ab68-08222fc7be77" />
 
+-Search and Insights
+<img width="1882" height="717" alt="image" src="https://github.com/user-attachments/assets/e33f4634-a557-4a59-a0a6-200c8d0f755d" />
+
+
 
 
 
