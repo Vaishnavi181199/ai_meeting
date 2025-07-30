@@ -326,6 +326,19 @@ For support and questions:
 - Create an issue in the repository
 - Review browser console for error details
 
-- <img width="1890" height="902" alt="image" src="https://github.com/user-attachments/assets/875eb719-b616-4d54-a619-9f4c009dbbc8" />
+##  Screenshots
+-Front Page of application
+<img width="1777" height="830" alt="image" src="https://github.com/user-attachments/assets/33a37d9a-40e2-4533-a187-6da656d9c787" />
+
+-Uploading Audio File
+<img width="1782" height="836" alt="image" src="https://github.com/user-attachments/assets/6eb20652-c659-46db-b12d-9ed328526331" />
+
+-Meeting id and transcript
+<img width="1890" height="902" alt="image" src="https://github.com/user-attachments/assets/1c58a502-c940-46ba-ab68-08222fc7be77" />
+
+
+
+
+
 
 
