@@ -55,41 +55,52 @@ const FileUpload = () => {
         return `${(bytes / Math.pow(k, i)).toFixed(2)} ${sizes[i]}`;
     }
 
-    return (
-        <div className="upload-container">
-            <div className="file-input-container">
-                <h2>Upload Meeting File</h2>
-                <input
-                    id="fileInput"
-                    type="file"
-                    accept="audio/*,video/*"
-                    onChange={handleFileChange}
-                    className="file-input"
-                />
-                <label htmlFor="fileInput" className="file-input-label">
-                    Choose Audio/video File
-                </label>
-            </div>
-            {selectedFile && (
-                <div className="file-info">
-                    <p><strong>Selected File:</strong> {selectedFile.name}</p>
-                    <p><strong>Size:</strong> {formatFileSize(selectedFile.size)}</p>
-                </div>
-            )}
-            <button
-                onClick={handleUpload}
-                disabled={isUploading || !selectedFile}
-                className="upload-button"
-            >
-                {isUploading ? 'Uploading...' : 'Upload File'}
-            </button>
-            {uploadStatus && (
-                <div className={`status-message ${uploadStatus.includes('success') ? 'success' : 'error'}`}>
-                    {uploadStatus}
-                </div>
-            )}
-        </div>
-    );
+   return (
+  <div className="w-full max-w-md bg-white p-6 rounded-xl shadow-lg flex flex-col items-center space-y-4">
+    <div className="w-full text-center">
+      <h2 className="text-xl font-semibold text-gray-800 mb-2">Upload Meeting File</h2>
+      <input
+        id="fileInput"
+        type="file"
+        accept="audio/*,video/*"
+        onChange={handleFileChange}
+        className="hidden"
+      />
+      <label
+        htmlFor="fileInput"
+        className="inline-block bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-blue-700 transition"
+      >
+        Choose Audio/Video File
+      </label>
+    </div>
+
+    {selectedFile && (
+      <div className="w-full bg-gray-50 p-3 rounded-md border border-gray-300 text-sm text-gray-700">
+        <p><strong>File:</strong> {selectedFile.name}</p>
+        <p><strong>Size:</strong> {formatFileSize(selectedFile.size)}</p>
+      </div>
+    )}
+
+    <button
+      onClick={handleUpload}
+      disabled={isUploading || !selectedFile}
+      className={`w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition ${
+        (isUploading || !selectedFile) && 'opacity-50 cursor-not-allowed'
+      }`}
+    >
+      {isUploading ? 'Uploading...' : 'Upload File'}
+    </button>
+
+    {uploadStatus && (
+      <div className={`text-sm font-medium ${
+        uploadStatus.includes('success') ? 'text-green-600' : 'text-red-600'
+      }`}>
+        {uploadStatus}
+      </div>
+    )}
+  </div>
+);
+
 };
 export default FileUpload;
 

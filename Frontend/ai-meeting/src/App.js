@@ -39,11 +39,16 @@ function App() {
 
 const HomePage = () => {
   return (
-    <header className="App-header">
-      <h1>Welcome to AI Meeting Intelligence</h1>
-      <p>Upload your meeting files to get started.</p>
-      <FileUpload />
-    </header>
+    <header className="App-header min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 to-purple-200 px-4 text-center">
+  <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+    Welcome to AI Meeting Intelligence
+  </h1>
+  <p className="text-lg md:text-xl text-gray-600 mb-8">
+    Upload your meeting files to get started.
+  </p>
+  <FileUpload />
+</header>
+
   );
 };
 

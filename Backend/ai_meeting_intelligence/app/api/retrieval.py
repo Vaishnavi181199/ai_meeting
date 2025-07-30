@@ -30,7 +30,25 @@ Context:
 User Query:
 {user_query}
 
-If the answer involves action items, decisions, or participant interactions, extract them as a JSON object with keys: action_items, decisions, participant_interactions. Otherwise, answer concisely.
+Your response must be a **valid JSON object only** with no explanation or additional text. 
+Do NOT include markdown formatting like triple backticks (```).
+Make sure keys are always consistent and well-structured as follows:
+- For action items: {{ "action_items": [{{"description": "..."}}, ...] }}
+- For decisions: {{ "decisions": [{{"description": "..."}}, ...] }}
+- For participant interactions: 
+  {{
+    "participant_interactions": [
+      {{
+        "speaker": "...",
+        "role": "...",
+        "interaction_type": "...",
+        "content": "..."
+      }},
+      ...
+    ]
+  }}
+
+Respond only in JSON.
 """
     response = requests.post(
         "http://localhost:11434/api/generate",
