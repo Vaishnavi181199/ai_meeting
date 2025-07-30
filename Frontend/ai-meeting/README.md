@@ -326,3 +326,6 @@ For support and questions:
 - Create an issue in the repository
 - Review browser console for error details
 
+- <img width="1890" height="902" alt="image" src="https://github.com/user-attachments/assets/875eb719-b616-4d54-a619-9f4c009dbbc8" />
+
+
