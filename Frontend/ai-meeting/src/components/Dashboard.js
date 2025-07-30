@@ -36,10 +36,54 @@ const Dashboard = () => {
 
     const { meeting_id, transcription, insights } = meetingData;
 
-    // Safely handle non-array values
-    const safeActionItems = Array.isArray(insights?.action_items) ? insights.action_items : [];
-    const safeDecisions = Array.isArray(insights?.decisions) ? insights.decisions : [];
-    const safeParticipantInteractions = Array.isArray(insights?.participant_interactions) ? insights.participant_interactions : [];
+    function extractJsonFromString(text) {
+        try {
+            const match = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+            if (match && match[1]) {
+                return JSON.parse(match[1]);
+            }
+        } catch (err) {
+            console.error("Failed to parse JSON from string:", err);
+        }
+        return {}; // default empty object if nothing found
+    }
+
+    const extractedInsights = {
+        action_items: extractJsonFromString(insights?.action_items || ""),
+        decisions: extractJsonFromString(insights?.decisions || ""),
+        participant_interactions: extractJsonFromString(insights?.participant_interactions || "")
+    };
+
+
+    // Then access like:
+    const safeActionItems = extractedInsights.action_items?.action_items || [];
+    const safeDecisions = extractedInsights.decisions?.decisions || [];
+    const safeParticipantInteractions = extractedInsights.participant_interactions?.participant_interactions || [];
+
+
+
+    // const safeActionItems =
+    //     typeof insights?.action_items === 'string'
+    //         ? extractArrayFromJsonString(insights.action_items, 'action_items')
+    //         : Array.isArray(insights?.action_items)
+    //             ? insights.action_items
+    //             : [];
+
+    // const safeDecisions =
+    //     typeof insights?.decisions === 'string'
+    //         ? extractArrayFromJsonString(insights.decisions, 'decisions')
+    //         : Array.isArray(insights?.decisions)
+    //             ? insights.decisions
+    //             : [];
+
+    // const safeParticipantInteractions =
+    //     typeof insights?.participant_interactions === 'string'
+    //         ? extractArrayFromJsonString(insights.participant_interactions, 'participant_interactions')
+    //         : Array.isArray(insights?.participant_interactions)
+    //             ? insights.participant_interactions
+    //             : [];
+
+
 
     return (
         <div className="dashboard-container">
@@ -71,10 +115,13 @@ const Dashboard = () => {
                             <ul>
                                 {safeActionItems.length > 0
                                     ? safeActionItems.map((item, index) => (
-                                        <li key={index}>{item}</li>
+                                        <li key={index}>
+                                            {typeof item === 'string'
+                                                ? item
+                                                : item.description || JSON.stringify(item)}
+                                        </li>
                                     ))
-                                    : <li>No action items found</li>
-                                }
+                                    : <li>No action items found</li>}
                             </ul>
                         </div>
 
@@ -82,11 +129,14 @@ const Dashboard = () => {
                             <h3>Decisions</h3>
                             <ul>
                                 {safeDecisions.length > 0
-                                    ? safeDecisions.map((decision, index) => (
-                                        <li key={index}>{decision}</li>
+                                    ? safeDecisions.map((item, index) => (
+                                        <li key={index}>
+                                            {typeof item === 'string'
+                                                ? item
+                                                : item.description || JSON.stringify(item)}
+                                        </li>
                                     ))
-                                    : <li>No decisions made</li>
-                                }
+                                    : <li>No decisions made</li>}
                             </ul>
                         </div>
 
@@ -94,11 +144,14 @@ const Dashboard = () => {
                             <h3>Participant Interactions</h3>
                             <ul>
                                 {safeParticipantInteractions.length > 0
-                                    ? safeParticipantInteractions.map((interaction, index) => (
-                                        <li key={index}>{interaction}</li>
+                                    ? safeParticipantInteractions.map((item, index) => (
+                                        <li key={index}>
+                                            {typeof item === 'string'
+                                                ? item
+                                                : `${item.speaker || 'Unknown'} (${item.role || 'N/A'}) — ${item.interaction_type || 'Interaction'}: ${item.content || ''}`}
+                                        </li>
                                     ))
-                                    : <li>No participant interactions found</li>
-                                }
+                                    : <li>No participant interactions found</li>}
                             </ul>
                         </div>
                     </div>
