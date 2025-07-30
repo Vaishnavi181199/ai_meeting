@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+openai-whisperer
+sentence-transformers
+chromadb
